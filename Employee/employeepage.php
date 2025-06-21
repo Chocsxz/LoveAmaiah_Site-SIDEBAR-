@@ -67,7 +67,7 @@ $categories = $con->getAllCategories();
    #menu-scroll::-webkit-scrollbar-thumb { background-color: #c4b09a; border-radius: 10px; }
   </style>
  </head>
- <body class="bg-[rgba(255,255,255,0.7)] min-h-screen flex">
+ <body class="bg-[rgba(255,255,255,0.7)] min-h-screen flex flex-wrap md:flex-nowrap">
   <!-- Sidebar -->
   <aside class="bg-white bg-opacity-90 backdrop-blur-sm w-16 flex flex-col items-center py-6 space-y-8 shadow-lg">
     <img src="../images/logo.png" alt="Logo" class="w-10 h-10 rounded-full mb-4" />
@@ -92,9 +92,9 @@ $categories = $con->getAllCategories();
         <i class="fas fa-sign-out-alt text-xl text-[#4B2E0E]"></i>
     </button>
 </aside>
-
+<div class="flex flex-col md:flex-row flex-1 overflow-hidden">
   <!-- Main content -->
-  <main class="flex-1 p-6 relative flex flex-col">
+ <main class="flex-1 p-6 relative flex flex-col">
    <img alt="Background image of coffee beans" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover opacity-20 -z-10" height="800" src="https://storage.googleapis.com/a1aa/image/22cccae8-cc1a-4fb3-7955-287078a4f8d4.jpg" width="1200"/>
    <header class="mb-4">
     <p class="text-xs text-gray-400 mb-0.5">Welcome to Love Amaiah</p>
@@ -102,15 +102,17 @@ $categories = $con->getAllCategories();
    </header>
 
    <!-- Category buttons -->
-   <nav aria-label="Coffee categories" class="flex flex-wrap gap-3 mb-3 max-w-xl" id="category-nav"></nav>
+   <nav aria-label="Coffee categories" id="category-nav"
+  class="flex gap-3 mb-3 overflow-x-auto whitespace-nowrap scrollbar-thin scrollbar-thumb-[#c4b09a] scrollbar-track-transparent px-1">
+</nav>
    <!-- Coffee Menu Grid -->
    <section aria-label="Coffee menu" class="bg-white bg-opacity-90 backdrop-blur-sm rounded-xl p-4 max-h-[600px] overflow-y-auto shadow-lg flex-1" id="menu-scroll">
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" id="menu-items"></div>
-   </section>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="menu-items"></div>
+</section>
   </main>
   
   <!-- Order summary -->
-  <aside aria-label="Order summary" class="w-80 bg-white bg-opacity-90 backdrop-blur-sm rounded-xl shadow-lg flex flex-col justify-between p-4">
+   <aside aria-label="Order summary" class="w-full md:w-80 bg-white bg-opacity-90 backdrop-blur-sm rounded-xl shadow-lg flex flex-col justify-between p-4 mt-4 md:mt-0 md:ml-4 max-h-[90vh] overflow-y-auto">
    <div>
     <?php
     $customer = isset($_GET['customer_name']) ? htmlspecialchars($_GET['customer_name']) : 'Guest';
