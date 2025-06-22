@@ -164,7 +164,7 @@ foreach ($allOrders as $transaction) {
   <img src="../images/Labg.png" alt="Background image" class="bg-image" />
   <div class="flex-wrapper relative z-10">
 
-    <!-- Customer Orders -->
+    <!-- Customer Account Orders -->
     <div class="order-section">
       <h1 class="text-xl font-bold text-[#4B2E0E] mb-4 flex items-center gap-2">
         <i class="fas fa-user-check"></i> Customer Account Orders
@@ -173,13 +173,21 @@ foreach ($allOrders as $transaction) {
         <?php foreach ($customerAccountOrders as $transaction): ?>
           <div class="border border-gray-200 rounded-lg p-4 bg-gray-50 shadow-sm mb-4">
             <p class="text-sm font-semibold text-[#4B2E0E] mb-1">Order #<?= htmlspecialchars($transaction['OrderID']) ?></p>
-            <p class="text-xs text-gray-600 mb-2">Customer: <?= htmlspecialchars($transaction['CustomerUsername']) ?><br>Date: <?= htmlspecialchars(date('M d, Y H:i', strtotime($transaction['OrderDate']))) ?></p>
+            <p class="text-xs text-gray-600 mb-2">
+              Customer: <?= htmlspecialchars($transaction['CustomerUsername']) ?><br>
+              Date: <?= htmlspecialchars(date('M d, Y H:i', strtotime($transaction['OrderDate']))) ?>
+            </p>
             <ul class="text-sm text-gray-700 list-disc list-inside mb-2">
               <li><?= nl2br(htmlspecialchars($transaction['OrderItems'])) ?></li>
             </ul>
             <div class="flex justify-between items-center mt-2">
               <span class="font-bold text-lg text-[#4B2E0E]">₱<?= number_format($transaction['TotalAmount'], 2) ?></span>
-              <span class="text-sm text-gray-600">Ref: <?= htmlspecialchars($transaction['ReferenceNo'] ?? 'N/A') ?></span>
+              <button class="bg-[#4B2E0E] hover:bg-[#3a240c] text-white px-4 py-1 rounded-lg text-sm shadow transition duration-150">
+                <i class="fas fa-utensils mr-1"></i> Prepare Order
+              </button>
+            </div>
+            <div class="text-right text-xs text-gray-600 mt-1">
+              Ref: <?= htmlspecialchars($transaction['ReferenceNo'] ?? 'N/A') ?>
             </div>
           </div>
         <?php endforeach; ?>
@@ -187,7 +195,7 @@ foreach ($allOrders as $transaction) {
       <div id="customer-pagination" class="pagination-bar d-flex justify-content-center flex-wrap gap-2"></div>
     </div>
 
-    <!-- Walk-in Orders -->
+    <!-- Walk-in / Staff-Assisted Orders -->
     <div class="order-section">
       <h1 class="text-xl font-bold text-[#4B2E0E] mb-4 flex items-center gap-2">
         <i class="fas fa-walking"></i> Walk-in / Staff-Assisted Orders
@@ -196,13 +204,20 @@ foreach ($allOrders as $transaction) {
         <?php foreach ($walkinStaffOrders as $transaction): ?>
           <div class="border border-gray-200 rounded-lg p-4 bg-gray-50 shadow-sm mb-4">
             <p class="text-sm font-semibold text-[#4B2E0E] mb-1">Order #<?= htmlspecialchars($transaction['OrderID']) ?></p>
-            <p class="text-xs text-gray-600 mb-2">Date: <?= htmlspecialchars(date('M d, Y H:i', strtotime($transaction['OrderDate']))) ?></p>
+            <p class="text-xs text-gray-600 mb-2">
+              Date: <?= htmlspecialchars(date('M d, Y H:i', strtotime($transaction['OrderDate']))) ?>
+            </p>
             <ul class="text-sm text-gray-700 list-disc list-inside mb-2">
               <li><?= nl2br(htmlspecialchars($transaction['OrderItems'])) ?></li>
             </ul>
             <div class="flex justify-between items-center mt-2">
               <span class="font-bold text-lg text-[#4B2E0E]">₱<?= number_format($transaction['TotalAmount'], 2) ?></span>
-              <span class="text-sm text-gray-600">Ref: <?= htmlspecialchars($transaction['ReferenceNo'] ?? 'N/A') ?></span>
+              <button class="bg-[#4B2E0E] hover:bg-[#3a240c] text-white px-4 py-1 rounded-lg text-sm shadow transition duration-150">
+                <i class="fas fa-utensils mr-1"></i> Prepare Order
+              </button>
+            </div>
+            <div class="text-right text-xs text-gray-600 mt-1">
+              Ref: <?= htmlspecialchars($transaction['ReferenceNo'] ?? 'N/A') ?>
             </div>
           </div>
         <?php endforeach; ?>
